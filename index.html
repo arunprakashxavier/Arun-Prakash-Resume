@@ -1,275 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arun Prakash - Resume</title>
-    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Arun Prakash - Portfolio Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            background-color: #f1f5f9; /* bg-slate-100 */
         }
-
-        .header {
-            background-color: #669999;
-            color: white;
-            text-align: center;
-            padding: 50px 10px 10px;
-            /* Reduced top and bottom padding */
-            position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .page-wrapper {
+            padding: 1rem;
         }
-
-        .header h1 {
-            margin: 0;
-            position: absolute;
-            top: 60%;
-            /* Adjusted to better fit with smaller header */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #ffc107;
+        @media (min-width: 768px) {
+            .page-wrapper {
+                padding: 1.5rem;
+            }
+        }
+        .skill-tag {
             display: inline-block;
-            padding: 6px 15px;
-            border-radius: 20px;
-            z-index: 2;
+            background-color: #E0E7FF;
+            color: #3730A3;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
-
-        .header img {
-            width: 130px;
-            /* Slightly reduced image size */
-            height: 130px;
-            border-radius: 50%;
-            position: absolute;
-            top: 30%;
-            /* Adjusted to center within smaller header */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border: 5px solid white;
-            z-index: 1;
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1F2937;
+            border-bottom: 2px solid #D1D5DB;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
         }
-
-        .contact-info {
-            text-align: center;
-            font-size: 0.9em;
-            color: #ddd;
-            padding-top: 120px;
-            /* Reduced padding to fit within new header size */
-            margin: 10px 0 30px;
-            /* Adjusted margin */
+        .print-show-inline, .print-only-url {
+            display: none;
         }
+        .no-print-text { }
 
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            display: flex;
-            gap: 20px;
-            position: relative;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background-color: #ddd;
-            transform: translateX(-50%);
-        }
-
-        .left-section,
-        .right-section {
-            flex: 1;
-        }
-
-        .section {
-            margin-bottom: 20px;
-        }
-
-        .section h2 {
-            margin-bottom: 10px;
-            color: #ff9900;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
-
-        .skills-bar {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .skills-bar span {
-            flex: 1;
-        }
-
-        .bar {
-            flex: 3;
-            height: 8px;
-            background-color: #ddd;
-            margin-left: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .bar span {
-            display: block;
-            height: 100%;
-            background-color: #4caf50;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        ul li {
-            margin-bottom: 8px;
-        }
-
-        .icon {
-            width: 40px;
-            /* Increased width */
-            height: 40px;
-            /* Added height for consistency */
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        @media print {
+            body {
+                font-size: 7pt;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            #resume-content {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-break {
+                page-break-before: always !important;
+                break-before: page !important;
+                height: 0;
+                display: block;
+            }
+            .print-break-inside-avoid {
+                page-break-inside: avoid !important;
+            }
+            .skill-tag {
+                border: 1px solid #C7D2FE;
+                padding: 0.01rem 0.2rem;
+                margin: 0.01rem;
+                font-size: 5.5pt;
+            }
+            .section-title {
+                font-size: 8.5pt;
+                margin-bottom: 0.1rem;
+                padding-bottom: 0.02rem;
+                border-bottom-width: 1px;
+            }
+            .print-text-sm { font-size: 6pt; }
+            .print-text-xs { font-size: 5pt; }
+            .print-leading-tight { line-height: 1.0; }
+            .print-mb-1 { margin-bottom: 0.02rem; }
+            .print-mb-2 { margin-bottom: 0.04rem; }
+            .print-py-0 { padding-top: 0; padding-bottom: 0; }
+            .print-px-0 { padding-left: 0; padding-right: 0; }
+            .print-show-inline {
+                display: inline !important;
+                color: #4B5563;
+                font-size: 5pt;
+            }
+            .project-gh-link .no-print-text { display: none !important; }
+            .no-print-text { display: none !important; }
+            .print-only-url {
+                display: inline !important;
+                color: #4B5563;
+                font-size: 5pt;
+            }
+            .project-description {
+                font-size: 5.5pt;
+                margin-bottom: 0.01rem;
+            }
+            .project-tech {
+                font-size: 5pt;
+                margin-top: 0.01rem;
+            }
+            ul.list-disc {
+                padding-left: 6px;
+                margin-top: 0.01rem;
+            }
+            ul.list-disc li { margin-bottom: 0; }
+            .gap-y-1 { gap: 0.02rem !important; }
+            .gap-x-2 { gap: 0.15rem !important; }
+            .gap-x-4 { gap: 0.3rem !important; }
+            .space-y-0\.5 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.01rem; }
+            .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.02rem; }
+            .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.03rem !important; }
+            .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.03rem !important; }
+            header.print-mb-2 { margin-bottom: 0.1rem !important; }
+            .profile-img-container { flex-shrink: 0; }
+            .profile-img {
+                width: 60px !important;
+                height: 60px !important;
+                border-width: 1px !important;
+                margin-bottom: 0.1rem !important;
+            }
+            .header-text-content { text-align: left !important; }
+            h1 { font-size: 12pt !important; margin-bottom: 0.02rem;}
+            p { font-size: 7.5pt !important; margin-top: 0.02rem; margin-bottom: 0.05rem;}
+            div.mt-3 { margin-top: 0.05rem !important;}
+            div a, div span { font-size: 6pt !important;}
+            section { margin-bottom: 0.2rem !important; }
         }
     </style>
 </head>
-
 <body>
-    <div class="header">
-        <img src="images/Arun Profile pic.jpg" alt="Profile Picture">
-        <h1>Arun Prakash</h1>
-        <p class="contact-info">Kunnathur, Pudukkottai-621316 | +91 9080890020 | arunprakash2629@gmail.com</p>
+<div class="fixed top-4 right-4 no-print z-50">
+    <button id="downloadPdfBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150 ease-in-out flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        Download PDF
+    </button>
+</div>
+
+<div class="page-wrapper">
+    <div id="resume-content" class="max-w-3xl mx-auto bg-white shadow-xl rounded-lg p-6 md:p-10 print:p-0">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-6 md:mb-8 print-mb-2 print-break-inside-avoid">
+            <div class="header-text-content text-center md:text-left mb-4 md:mb-0 md:mr-6">
+                <h1 class="text-3xl md:text-4xl font-bold text-indigo-700">Arun Prakash</h1>
+                <p class="text-lg md:text-xl text-slate-600 font-medium mt-1">Full-Stack Java Developer</p>
+                <div class="mt-3 md:mt-4 text-sm text-slate-500 flex flex-col items-center md:items-start gap-y-1 print-text-xs">
+                    <div class="flex items-center gap-x-2">
+                        <a href="mailto:arunprakash2629@gmail.com" class="hover:text-indigo-600" aria-label="Email Arun Prakash">arunprakash2629@gmail.com</a>
+                        <span class="hidden md:inline">&bull;</span>
+                        <a href="tel:+919080890020" class="hover:text-indigo-600" aria-label="Call Arun Prakash">+91 9080890020</a>
+                    </div>
+                    <div class="flex items-center gap-x-2">
+                        <span>Pudukkottai</span>
+                        <span class="hidden md:inline">&bull;</span>
+                        <a href="https://www.linkedin.com/in/arun-prakash-29nov99/" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600" aria-label="View Arun Prakash's LinkedIn Profile">
+                            <span class="no-print-text">linkedin.com/in/arun-prakash-29nov99</span>
+                            <span class="print-only-url">linkedin.com/in/arun-prakash-29nov99</span>
+                        </a>
+                    </div>
+                    <a href="https://github.com/arunprakashxavier" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 mt-1" aria-label="View Arun Prakash's GitHub Profile">
+                        <span class="no-print-text">github.com/arunprakashxavier</span>
+                        <span class="print-only-url">github.com/arunprakashxavier</span>
+                    </a>
+                </div>
+            </div>
+            <div class="profile-img-container flex-shrink-0">
+                <img src="images/Arun Profile pic.jpg" alt="Headshot of Arun Prakash" class="profile-img w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-indigo-200 shadow-lg" onerror="this.style.display='none';">
+            </div>
+        </header>
+
+        <section class="mb-4 md:mb-6 print-mb-2 print-break-inside-avoid">
+            <h2 class="section-title">Summary</h2>
+            <p class="text-slate-700 leading-relaxed print-text-sm print-leading-tight">
+                Electronics and Communication Engineer turned Full-Stack Developer with hands-on experience building and deploying scalable Java applications using Spring Boot. Proven ability to architect secure RESTful APIs, implement role-based security, and integrate third-party services like Stripe. Combines a background in data analysis with strong technical skills to build robust and efficient web solutions.
+            </p>
+        </section>
+
+        <section class="mb-4 md:mb-6 print-mb-2 print-break-inside-avoid">
+            <h2 class="section-title">Experience</h2>
+            <div class="print-mb-1">
+                <h3 class="text-md font-semibold text-slate-800">Graduate Apprentice</h3>
+                <p class="text-sm text-slate-600 print-text-xs">Bunge India PVT LTD - Trichy | 11/2023 – Present</p>
+                <ul class="list-disc list-inside text-sm text-slate-700 mt-1 pl-4 space-y-0.5 print-text-xs print-leading-tight">
+                    <li>Applied analytical skills to interpret operational data, identifying process bottlenecks and contributing to a 5% improvement in workflow efficiency.</li>
+                    <li>Collaborated in a cross-functional team to document and standardize quality control procedures, enhancing team alignment and process consistency.</li>
+                    <li>Developed proficiency in industry-standard safety protocols and operational best practices within a large-scale production environment.</li>
+                </ul>
+            </div>
+            <div class="mt-3 print-mb-1">
+                <h3 class="text-md font-semibold text-slate-800">Supervisor</h3>
+                <p class="text-sm text-slate-600 print-text-xs">S Prince Hightech PVT LTD - Chennai | 01/2023 – 04/2023</p>
+                <ul class="list-disc list-inside text-sm text-slate-700 mt-1 pl-4 space-y-0.5 print-text-xs print-leading-tight">
+                    <li>Led a team of 8+ members, delegating tasks based on individual strengths and managing project timelines to ensure milestones were met on schedule.</li>
+                    <li>Oversaw daily operations and maintained quality standards, honing skills in project coordination and team management applicable to agile development environments.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-4 md:mb-6 print-mb-2">
+            <h2 class="section-title">Projects</h2>
+            <div class="space-y-2 md:space-y-3 print-leading-tight">
+                <div class="print-break-inside-avoid print-mb-1">
+                    <h3 class="text-md font-semibold text-indigo-700">Sleek Calculator
+                        <a href="https://github.com/arunprakashxavier/Calculator" target="_blank" rel="noopener noreferrer" class="project-gh-link text-indigo-500 hover:text-indigo-700 text-xs ml-2 no-print" aria-label="View source code for Sleek Calculator on GitHub"><span class="no-print-text">(GitHub)</span></a>
+                        <span class="print-show-inline text-xs ml-1">(github.com/arunprakashxavier/Calculator)</span>
+                        <a href="https://sleek-calculator.onrender.com" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:text-indigo-700 text-xs ml-2 no-print" aria-label="View live demo of Sleek Calculator">(Live Demo)</a>
+                    </h3>
+                    <p class="text-sm text-slate-600 project-description print-text-xs">Created a modern, responsive web-based calculator to demonstrate strong frontend fundamentals. Focused on user experience by implementing switchable themes, full keyboard input support, and memory functions, resulting in a polished and intuitive tool.</p>
+                    <p class="text-xs text-slate-500 mt-1 project-tech print-text-xs"><em>Tech: HTML, CSS, JavaScript.</em></p>
+                </div>
+
+                <div class="page-break"></div>
+
+                <div class="print-break-inside-avoid print-mb-1">
+                    <h3 class="text-md font-semibold text-indigo-700">Employee Management System
+                        <a href="https://github.com/arunprakashxavier/employee-management-system" target="_blank" rel="noopener noreferrer" class="project-gh-link text-indigo-500 hover:text-indigo-700 text-xs ml-2 no-print" aria-label="View source code for Employee Management System on GitHub"><span class="no-print-text">(GitHub)</span></a>
+                        <span class="print-show-inline text-xs ml-1">(github.com/arunprakashxavier/employee-management-system)</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 project-description print-text-xs">Developed a full-stack Employee Management System with RESTful APIs to streamline HR operations by efficiently managing employee data (CRUD).</p>
+                    <p class="text-xs text-slate-500 mt-1 project-tech print-text-xs"><em>Tech: Java, Spring Boot, Spring Security, JWT, MySQL, Spring Data JPA.</em></p>
+                </div>
+
+                <div class="print-break-inside-avoid print-mb-1">
+                    <h3 class="text-md font-semibold text-indigo-700">Bus Booking App
+                        <a href="https://github.com/arunprakashxavier/bus-booking-app" target="_blank" rel="noopener noreferrer" class="project-gh-link text-indigo-500 hover:text-indigo-700 text-xs ml-2 no-print" aria-label="View source code for Bus Booking App on GitHub"><span class="no-print-text">(GitHub)</span></a>
+                        <span class="print-show-inline text-xs ml-1">(github.com/arunprakashxavier/bus-booking-app)</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 project-description print-text-xs">To provide a seamless booking experience, I engineered a full-stack application featuring secure REST APIs for user management and booking. I implemented JWT-based authentication for security and integrated the Stripe API for reliable payment processing, resulting in a complete, end-to-end booking solution with admin controls.</p>
+                    <p class="text-xs text-slate-500 mt-1 project-tech print-text-xs"><em>Tech: Java, Spring Boot, Spring Security, JWT, Stripe API, Swagger, MySQL.</em></p>
+                </div>
+
+                <div class="print-break-inside-avoid print-mb-1">
+                    <h3 class="text-md font-semibold text-indigo-700">Hospital Management System
+                        <a href="https://github.com/arunprakashxavier/hospital-management-system" target="_blank" rel="noopener noreferrer" class="project-gh-link text-indigo-500 hover:text-indigo-700 text-xs ml-2 no-print" aria-label="View source code for Hospital Management System on GitHub"><span class="no-print-text">(GitHub)</span></a>
+                        <span class="print-show-inline text-xs ml-1">(github.com/arunprakashxavier/hospital-management-system)</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 project-description print-text-xs">To tackle the challenge of managing sensitive patient data, I designed a system with robust, role-based access control using Spring Security. This provided distinct interfaces and permissions for Patients, Doctors, and Admins, ensuring data privacy and integrity while streamlining appointment and medication tracking.</p>
+                    <p class="text-xs text-slate-500 mt-1 project-tech print-text-xs"><em>Tech: Java 17, Spring Boot, Spring Security, MySQL, Thymeleaf, HTML, CSS.</em></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-4 md:mb-6 print-mb-2 print-break-inside-avoid">
+            <h2 class="section-title">Education</h2>
+            <div class="space-y-2 print-leading-tight">
+                <div class="print-mb-1">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-md font-semibold text-slate-800">B.E. in Electronics and Communication</h3>
+                        <p class="text-sm text-slate-600 print-text-xs font-medium text-right"> 73.50%</p>
+                    </div>
+                    <p class="text-sm text-slate-500 print-text-xs">K Ramakrishnan College of Technology, Trichy</p>
+                </div>
+                <div class="print-mb-1">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-md font-semibold text-slate-800">Higher Secondary Certificate</h3>
+                        <p class="text-sm text-slate-600 print-text-xs font-medium text-right">66.83%</p>
+                    </div>
+                    <p class="text-sm text-slate-500 print-text-xs">Chellammal Matriculation Higher Secondary School, Trichy</p>
+                </div>
+                <div class="print-mb-1">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-md font-semibold text-slate-800">Secondary School Leaving Certificate</h3>
+                        <p class="text-sm text-slate-600 print-text-xs font-medium text-right">90.00%</p>
+                    </div>
+                    <p class="text-sm text-slate-500 print-text-xs">Chellammal Matriculation Higher Secondary School, Trichy</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="print-break-inside-avoid">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="space-y-3">
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-1 print-text-sm">Languages:</h3>
+                    <p><span class="skill-tag">Java</span><span class="skill-tag">JavaScript</span><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">SQL</span></p>
+                </div>
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-1 print-text-sm">Frameworks & Libraries:</h3>
+                    <p><span class="skill-tag">Spring Boot</span><span class="skill-tag">Spring Security</span><span class="skill-tag">Spring Data JPA</span><span class="skill-tag">Thymeleaf</span></p>
+                </div>
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-1 print-text-sm">Databases & Build Tools:</h3>
+                    <p><span class="skill-tag">MySQL</span><span class="skill-tag">Maven</span></p>
+                </div>
+                <div>
+                    <h3 class="text-md font-semibold text-slate-700 mb-1 print-text-sm">Professional &amp; Operational Skills:</h3>
+                    <p><span class="skill-tag">Data Analysis</span><span class="skill-tag">Process Improvement</span><span class="skill-tag">Workflow Optimization</span><span class="skill-tag">Quality Control</span><span class="skill-tag">Technical Documentation</span><span class="skill-tag">Safety Protocols</span></p>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="container">
-        <div class="left-section">
-            <div class="section">
-                <div class="section-header">
-                    <img class="icon" src="images/profile.png" alt="Icon">
-                    <h2>Profile</h2>
-                </div>
-                <p>Energetic and detail-oriented graduate in electronic and communication engineering with a
-                    solid understanding of Java. Experienced in instrumentation, and eager to contribute as a developer.
-                    Committed to applying my skills and learning new ones to drive success.</p>
-            </div>
-            <div class="section">
-                <div class="section-header">
-                    <img class="icon" src="images/icons8-about-me-48.png" alt="Icon">
-                    <h2>About Me</h2>
-                </div>
-                <p>Date of Birth : November 29, 1999</p>
-                <p>Nationality   : Indian</p>
-                <p>Gender        : Male</p>
+</div>
 
+<script>
+    document.getElementById("downloadPdfBtn").addEventListener("click", function () {
+        // Scroll to the top of the page to ensure the PDF captures the entire content correctly.
+        window.scrollTo(0, 0);
 
-            </div>
-            <div class="section">
-                <div class="section-header">
-                    <img class="icon" src="images/Skills icon.png" alt="Icon">
-                    <h2>Skills</h2>
-                </div>
-                <h3>Technical Skills</h3>
-                <div class="skills-bar"><span>HTML</span>
-                    <div class="bar"><span style="width: 80%;"></span></div>
-                </div>
-                <div class="skills-bar"><span>CSS</span>
-                    <div class="bar"><span style="width: 70%;"></span></div>
-                </div>
-                <div class="skills-bar"><span>JavaScript</span>
-                    <div class="bar"><span style="width: 75%;"></span></div>
-                </div>
-                <div class="skills-bar"><span>Java</span>
-                    <div class="bar"><span style="width: 81%;"></span></div>
-                </div>
-                <div class="skills-bar"><span>MySQL</span>
-                    <div class="bar"><span style="width: 90%;"></span></div>
-                </div>
-                <div class="skills-bar"><span>C Programming</span>
-                    <div class="bar"><span style="width: 70%;"></span></div>
-                </div>
-                <h3>Additional Skills</h3>
-                <ul>
-                    <li>Time Management</li>
-                    <li>Problem-Solving</li>
-                    <li>Critical Thinking</li>
-                    <li>Leadership and Team Management</li>
-                    <li>Adaptability</li>
-                </ul>
-            </div>
-        </div>
-        <div class="right-section">
-            <div class="section">
-                <div class="section-header">
-                    <img class="icon" src="images/Experience.png" alt="Icon">
-                    <h2>Work Experience</h2>
-                </div>
+        const element = document.getElementById("resume-content");
+        const opt = {
+            margin: 5,
+            filename: 'Arun_Prakash_Resume.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: {
+                scale: 2,
+                useCORS: true // Important for external images
+            },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
 
-                <h3>Graduate Apprentice</h3>
-                <p>Bunge India PVT LTD - Trichy (11/2023 - 02/2024)</p>
-                <ul>
-                    <li>Gained practical experience by working on real projects under the guidance of experienced
-                        professionals.</li>
-                    <li>Learned about industry standards, regulations, and best practices.</li>
-                    <li>Supported the team in problem-solving and project execution.</li>
-                </ul>
-
-                <h3>Supervisor</h3>
-                <p>S Prince Hightech PVT LTD - Chennai (01/2023 - 04/2023)</p>
-                <ul>
-                    <li>Assign tasks and responsibilities based on employees' strengths and expertise.</li>
-                    <li>Ensure tasks are completed on time and meet quality standards.</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <div class="section-header">
-                    <img class="icon" src="images/education (2).png" alt="Icon">
-                    <h2>Education</h2>
-                </div>
-                <h3>Electronics and Communication Engineering</h3>
-                <p>K Ramakrsihnan college of technology, Tiruchirapalli (2018 - 2022)</p>
-                <ul>
-                    <li>Percentage: 73.50%</li>
-                    <li>Project: Designed and developed an half adder in opti-FDTD analyzer.</li>
-
-                </ul>
-                <h3>Higher Secondary Certificate</h3>
-                <p>Chelammal matriculation higher secondary school, Tiruchirapalli (2017 - 2018)</p>
-                <ul>
-                    <li>Percentage: 66.83%</li>
-                </ul>
-
-                <h3>Secondary School Leaving Certificate</h3>
-                <p>Chelammal matriculation higher secondary school, Tiruchirapalli (2015 - 2016)</p>
-                <ul>
-                    <li>Percentage: 90.20%</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // JavaScript for interactivity or additional functionalities can go here
-        console.log("Resume loaded successfully");
-    </script>
+        // Generate the PDF from the element.
+        html2pdf().set(opt).from(element).save();
+    });
+</script>
 </body>
-
 </html>
